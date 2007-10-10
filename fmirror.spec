@@ -6,7 +6,7 @@ License:	GPLv2+
 Group:		Networking/File transfer
 URL:		ftp://ftp.sunet.se/pub/nir/ftp/utilities/fmirror/
 Source:		ftp://ftp.sunet.se/pub/nir/ftp/utilities/fmirror/testing/%{name}-%{version}.tar.bz2
-Patch0:		fmirror-mandrake.patch
+Patch0:		fmirror-mandriva.patch
 Patch1:		fmirror-0.8.4-anonymous.patch
 Patch2:		fmirror-0.8.4-typofix_inman.patch
 Patch3:		fmirror-0.8.4-signal.patch
