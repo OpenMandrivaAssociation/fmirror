@@ -15,6 +15,7 @@ Patch5:		fmirror-0.8.4-maxdel.patch
 Patch6:		fmirror-0.8.4-eol.patch
 Patch7:		fmirror-0.8.4-remotez.patch
 Patch8:		fmirror-0.8.4-bugfix.patch
+BuildRoot:	%{_tmppath}/%{name}-buildroot
 
 %description
 This is an FTP mirroring package; it is useful to keep in sync with some FTP
