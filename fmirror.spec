@@ -1,7 +1,7 @@
 Summary:	FTP mirroring package
 Name:		fmirror
 Version:	0.8.4
-Release:	%mkrel 8
+Release:	%mkrel 9
 License:	GPLv2+
 Group:		Networking/File transfer
 URL:		ftp://ftp.sunet.se/pub/nir/ftp/utilities/fmirror/
