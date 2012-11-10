@@ -1,0 +1,11 @@
+--- fmirror-0.8.4.orig/fmirror.c
++++ fmirror-0.8.4/fmirror.c
+@@ -642,7 +646,7 @@
+     va_list args;
+     va_start(args, format);
+     vsprintf(buffer, format, args);
+-    l = fprintf(out_file, "%s\n", buffer); 
++    l = fprintf(out_file, "%s\r\n", buffer); 
+     fflush(out_file);
+     buffer[l - 1] = 0;
+     LOG(6, cmd, ("---> %s", buffer));

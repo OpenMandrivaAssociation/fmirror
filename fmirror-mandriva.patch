@@ -1,0 +1,46 @@
+diff -urN fmirror-0.8.4pre8-orig/configs/mandrake.conf fmirror-0.8.4pre8/configs/mandrake.conf
+--- fmirror-0.8.4pre8-orig/configs/mandrake.conf	Thu Jan  1 01:00:00 1970
++++ fmirror-0.8.4pre8/configs/mandrake.conf	Sun Jul 11 18:14:06 1999
+@@ -0,0 +1,11 @@
++# This is the file used to mirror Cooker... If you're an ISP, please use it ;)
++
++username:	ftp
++password:	root@mandrakesoft.de
++host:		ftp.ciril.fr
++remotedir:	/pub/linux/mandrake-devel
++localdir:	/home/ftp/pub/cooker
++
++# some excludes...
++exclude:	f	^(\.in\.|\.mirror|core$|MIRROR\.LOG|\.notar|\.message)
++exclude:	f	^(\.cache|\.zipped|lost\+found|Network Thrash Folder)
+diff -urN fmirror-0.8.4pre8-orig/configs/redhat.conf fmirror-0.8.4pre8/configs/redhat.conf
+--- fmirror-0.8.4pre8-orig/configs/redhat.conf	Sat Aug  8 15:55:06 1998
++++ fmirror-0.8.4pre8/configs/redhat.conf	Thu Jan  1 01:00:00 1970
+@@ -1,27 +0,0 @@
+-# This is a file that I once used to mirror redhat.
+-
+-username:	ftp
+-password:	finnag@pvv.ntnu.no
+-host:		ftp.funet.fi
+-remotedir:	/pub/Linux/images/RedHat
+-localdir:	/home/finnag/redhat
+-compressed:	1
+-decompressor:	gzip
+-decompressor_opt: -dc
+-dircmd:		RETR ls-lR.gz
+-
+-# the normal excludes first
+-exclude:	f	^(\.in\.|\.mirror|core$|MIRROR\.LOG|\.notar|\.message)
+-exclude:	f	^(\.cache|\.zipped|lost\+found|Network Thrash Folder)
+-
+-# only mirror devel/i386, redhat-4.1 and docs
+-exclude:	px	^(devel/i386|redhat-4.1|docs)/
+-
+-# don't get alpha or sparc stuff
+-exclude:	p	(^|/)(alpha|sparc)/
+-
+-# don't get .ps or .dvi docs
+-exclude:	p	docs/.*\.(ps|dvi)
+-
+-# don't get untarred or redhat-digest docs
+-exclude:	p	docs/(untarred|redhat-digest)/

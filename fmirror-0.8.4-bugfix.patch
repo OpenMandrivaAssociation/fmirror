@@ -1,0 +1,11 @@
+--- fmirror-0.8.4.orig/fmirror.c
++++ fmirror-0.8.4/fmirror.c
+@@ -3285,7 +3359,7 @@
+     long year = tm->tm_year - 70;
+     long month = tm->tm_mon; /* 0..11 */
+     long day = tm->tm_mday - 1; /* 0..30 */
+-    long hour = tm->tm_hour;
++    long hour = tm->tm_hour - 1;
+     long min = tm->tm_min;
+     long sec = tm->tm_sec; /* 0..59 (+ leap second on bad days) */
+ 

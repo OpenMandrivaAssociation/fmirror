@@ -1,0 +1,63 @@
+--- fmirror-0.8.4.orig/fmirror.c
++++ fmirror-0.8.4/fmirror.c
+@@ -61,6 +61,7 @@
+ #include <sys/types.h>
+ #include <sys/socket.h>
+ #include <sys/time.h>
++#include <sys/wait.h>
+ #include <unistd.h>
+ #include <stdio.h>
+ #include <string.h>
+@@ -165,6 +166,7 @@
+ static int keep_newer = 0; /* don't download if a newer version exists */
+ static int reset_times = 0; /* reset access and mod times to remote */
+ static int use_mdtm = 1; /* default is use MDTM if we can find remote TZ */
++static int child_status = 0;
+ 
+ static volatile sig_atomic_t alarmed = 0;
+ 
+@@ -2327,6 +2377,10 @@
+     }
+ }
+ 
++static void handle_sigchld(int sig_num) {
++    sig_num=sig_num;
++    wait(&child_status);
++}
+ 
+ static void
+ handle_dir_listing(struct connection *c)
+@@ -2351,12 +2407,14 @@
+ 			 inet_ntoa(sad.sin_addr), htons(sad.sin_port)));
+     }
+ 
++    child_status=0;
+     if (compressed) {
+ 	/* fork off the decompressor and give it the net-conection as stdin */
+ 	int p[2];
+ 	pid_t pid;
+ 	LOG(5, exec,
+ 	    ("Running decompressor %s %s", decompressor, decompressor_opt));
++        signal(SIGCHLD, handle_sigchld);
+ 	if (pipe(p)) {
+ 	    LOG(0, failure, ("pipe() failed: %s", strerror(errno)));
+ 	    exit(EXIT_FAILURE);
+@@ -2399,6 +2458,10 @@
+ 	alarm(input_timeout);
+ 	addr = fgets(line, sizeof(line), stream);
+ 	alarm(0);
++	if (child_status) {
++		LOG(0, failure, ("Decompression failed (child process unexpectedly died). Aborting."));
++		exit(EXIT_FAILURE);
++	 }
+ 	if (!addr) {
+ 	    if (errno == EINTR || alarmed) {
+ 		LOG(0, failure, ("Timeout waiting for reply. Aborting."));
+@@ -2412,6 +2475,7 @@
+     
+     fclose(stream);
+     close(fd);
++    signal(SIGCHLD, SIG_DFL);
+ }
+ 
+ 

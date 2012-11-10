@@ -1,0 +1,28 @@
+--- fmirror-0.8.4.orig/fmirror.c
++++ fmirror-0.8.4/fmirror.c
+@@ -809,14 +813,17 @@
+ 	exit(EXIT_FAILURE);
+     
+     if (password || err >= 300) {
+-	/* Don't send password if the ftp server didn't ask for it and 
+-	 * it isn't set. */
+-	char buffer[128];
+-	if (!password) {
+-	    struct passwd *p = getpwuid(getuid());
+-	    sprintf(buffer, "%s@", p->pw_name);
+-	}
+-	cmd("PASS %s", password ? password : buffer);
++	 /* If there is no anonymous ftp password specified
++	  * then we'll just use anonymous@
++	  * We don't send any other thing because:
++	  * - We want to remain anonymous
++	  * - We want to stop SPAM
++	  * - We don't want to let ftp sites to discriminate by the user,
++	  *   host or country.
++	  *
++	  *   Thanks to E. Perez, debian bug #136433
++	  */
++        cmd("PASS %s", password ? password : "anonymous@");
+ 	if (!success())
+ 	    exit(EXIT_FAILURE);
+     }

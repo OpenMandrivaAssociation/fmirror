@@ -1,0 +1,19 @@
+--- fmirror-0.8.4.orig/fmirror.c
++++ fmirror-0.8.4/fmirror.c
+@@ -2558,6 +2622,7 @@
+ 
+ #define OPT_SET_STRING(x) opt_set_string(#x, #x ":", line, &x)
+ #define OPT_SET_INT(x) opt_set_int(#x, #x ":", line, &x)
++#define OPT_SET_INT_MUL(x,y) (opt_set_int(#x, #x ":", line, &x) ? (x*=y, 1) : 0)
+ #define OPT_SET_LOG(x) opt_set_int("log_" #x, "log_" #x ":", line, &log_ ## x)
+ 
+ static void
+@@ -2618,7 +2683,7 @@
+ 	  OPT_SET_INT(maxdel) ||
+ 	  OPT_SET_INT(try_reget) ||
+ 	  OPT_SET_INT(use_mdtm) ||
+-	  OPT_SET_INT(remotetz) ||
++	  OPT_SET_INT_MUL(remotetz,60) ||
+ 	  OPT_SET_INT(verbosity) ||
+ 	  OPT_SET_INT(keep_newer) ||
+ 	  OPT_SET_INT(reset_times) ||

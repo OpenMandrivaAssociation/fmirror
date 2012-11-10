@@ -1,0 +1,13 @@
+--- fmirror-0.8.4.orig/fmirror.c
++++ fmirror-0.8.4/fmirror.c
+@@ -2939,6 +3009,10 @@
+     last_was_blank = 0;
+     LOG(9, other, ("Permission %s = 0%o", buf, p->perm));
+     buf = name + 10; /* Skip permission fields */
++    if (buf[0] == '+'){
++	    LOG(9, other, ("Skipping Solaris ACL flag"));
++	    buf=name + 11; /* skip ACL flag */
++    }
+     buf = strtok(buf, whitespace); /* buf is now i-node count */
+     buf = strtok(NULL, whitespace); /* buf is now owner */
+     buf = strtok(NULL, ""); /* group or size ++ */

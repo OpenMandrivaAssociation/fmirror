@@ -1,0 +1,11 @@
+--- fmirror-0.8.4.orig/fmirror.1
++++ fmirror-0.8.4/fmirror.1
+@@ -347,7 +354,7 @@
+ 
+ .TP
+ .BI loglevel: " level"
+-Specifies the logging level (debug level). Equivalent to -l command line
++Specifies the logging level (debug level). Equivalent to -d command line
+ option.
+ 
+ .TP
