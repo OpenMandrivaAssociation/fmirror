@@ -16,6 +16,11 @@ Patch6:		fmirror-0.8.4-eol.patch
 Patch7:		fmirror-0.8.4-remotez.patch
 Patch8:		fmirror-0.8.4-bugfix.patch
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 %description
 This is an FTP mirroring package; it is useful to keep in sync with some FTP
 site.
